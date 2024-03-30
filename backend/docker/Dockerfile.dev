@@ -1,4 +1,7 @@
 FROM golang:1.22.1-alpine
+
+RUN go install github.com/githubnemo/CompileDaemon@latest
+
 WORKDIR /app
 
 COPY go.mod go.sum ./
@@ -6,4 +9,4 @@ RUN go mod download && go mod verify
 
 COPY . .
 
-CMD [ "go", "run", "main.go" ]
+CMD CompileDaemon -log-prefix=false -build="go build -o build/main ." -command="./build/main"
