@@ -10,8 +10,8 @@ services:
     networks:
       - notes
     environment:
-      - POSTGRES_URL=${POSTGRES_URL}
       - PORT=${PORT}
+      - POSTGRES_URL=${POSTGRES_URL}
 
   postgres:
     image: postgres:16.2-alpine3.19
@@ -36,9 +36,9 @@ services:
       timeout: 3s
       retries: 10
     environment:
-      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
-      POSTGRES_USER: ${POSTGRES_USER}
       POSTGRES_DB: ${POSTGRES_DB}
+      POSTGRES_USER: ${POSTGRES_USER}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
     networks:
       - notes
 

@@ -13,6 +13,10 @@ localhost {
 		reverse_proxy backend:8000
 	}
 
+	handle /adminer {
+		reverse_proxy adminer:8080
+	}
+
 	# Default handler: If no other handlers match, return a "Not Found" error.
 	handle {
 		respond "Not Found" 404
