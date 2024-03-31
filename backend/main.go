@@ -1,10 +1,13 @@
 package main
 
 import (
-	"fmt"
-	"os"
+	"github.com/SantGT5/notes/initializers"
 )
 
+func int() {
+	initializers.LoadEnvVariables()
+}
+
 func main() {
-	fmt.Println(os.Getenv("POSTGRES_URL"))
+	int()
 }
