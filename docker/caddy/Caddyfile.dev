@@ -5,7 +5,6 @@
 	}
 	local_certs
 	skip_install_trust
-	auto_https disable_redirects
 }
 
 localhost {
