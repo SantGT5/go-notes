@@ -9,13 +9,13 @@
 }
 
 localhost {
-    handle /backend/* {
-        uri strip_prefix /backend
-        reverse_proxy backend:8000
-    }
+	handle /backend/* {
+		uri strip_prefix /backend
+		reverse_proxy backend:8000
+	}
 
-    # Default handler: If no other handlers match, return a "Not Found" error.
-    handle {
-        respond "Not Found" 404
-    }
+	# Default handler: If no other handlers match, return a "Not Found" error.
+	handle {
+		respond "Not Found" 404
+	}
 }
