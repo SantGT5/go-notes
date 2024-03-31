@@ -10,7 +10,8 @@ services:
     networks:
       - notes
     environment:
-      - POSTGRES_URL= ${POSTGRES_URL}
+      - POSTGRES_URL=${POSTGRES_URL}
+      - PORT=${PORT}
 
   postgres:
     image: postgres:16.2-alpine3.19
@@ -43,6 +44,8 @@ services:
 
 volumes:
   postgres:
+  caddy_data:
+  caddy_config:
 
 networks:
   notes:

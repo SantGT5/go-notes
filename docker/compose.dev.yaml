@@ -5,3 +5,16 @@ services:
       dockerfile: docker/Dockerfile.dev
     volumes:
       - ../backend:/app
+
+  caddy:
+    image: caddy:2.7.6-alpine
+    container_name: caddy
+    ports:
+      - 80:80
+      - 443:443
+    volumes:
+      - ./caddy/Caddyfile.dev:/etc/caddy/Caddyfile
+      - caddy_data:/data
+      - caddy_config:/config
+    networks:
+      - notes
