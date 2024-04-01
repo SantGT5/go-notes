@@ -6,6 +6,7 @@ import (
 
 	"github.com/SantGT5/notes/controllers"
 	"github.com/SantGT5/notes/initializers"
+	"github.com/SantGT5/notes/middleware"
 	"github.com/gin-gonic/gin"
 )
 
@@ -20,9 +21,10 @@ func main() {
 
 	r := gin.Default()
 	r.POST("/signup", controllers.Signup)
+	r.POST("/login", controllers.Login)
+	r.GET("/validate", middleware.RequiredAuth, controllers.Validate)
 
 	addr := ":" + os.Getenv("BACKEND_PORT")
-
 	err := r.Run(addr)
 
 	if err != nil {

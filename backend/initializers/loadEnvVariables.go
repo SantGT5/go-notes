@@ -9,6 +9,7 @@ import (
 var envVars []string = []string{
 	"BACKEND_PORT",
 	"POSTGRES_URL",
+	"JWT_SECRET_KEY",
 }
 
 // LoadEnvVariables checks for empty or unset env variables and prints a list of them.

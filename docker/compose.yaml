@@ -10,6 +10,7 @@ services:
     environment:
       BACKEND_PORT: ${BACKEND_PORT}
       POSTGRES_URL: ${POSTGRES_URL}
+      JWT_SECRET_KEY: ${JWT_SECRET_KEY}
     networks:
       - notes
 
