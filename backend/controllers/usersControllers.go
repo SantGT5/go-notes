@@ -46,6 +46,10 @@ func Signup(c *gin.Context) {
 	}
 
 	c.JSON(http.StatusOK, gin.H{
-		"data": result,
+		"data": gin.H{
+			"user": gin.H{
+				"email": user.Email,
+			},
+		},
 	})
 }
