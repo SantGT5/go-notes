@@ -2,7 +2,9 @@ package main
 
 import (
 	"fmt"
+	"os"
 
+	"github.com/SantGT5/notes/controllers"
 	"github.com/SantGT5/notes/initializers"
 	"github.com/gin-gonic/gin"
 )
@@ -17,13 +19,11 @@ func main() {
 	int()
 
 	r := gin.Default()
-	r.GET("/ping", func(c *gin.Context) {
-		c.JSON(200, gin.H{
-			"message": "pong",
-		})
-	})
+	r.POST("/signup", controllers.Signup)
 
-	err := r.Run()
+	addr := ":" + os.Getenv("BACKEND_PORT")
+
+	err := r.Run(addr)
 
 	if err != nil {
 		fmt.Println("Error starting server:", err.Error())

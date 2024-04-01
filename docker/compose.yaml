@@ -7,11 +7,11 @@ services:
     depends_on:
       postgres:
         condition: service_healthy
+    environment:
+      BACKEND_PORT: ${BACKEND_PORT}
+      POSTGRES_URL: ${POSTGRES_URL}
     networks:
       - notes
-    environment:
-      - PORT=${PORT}
-      - POSTGRES_URL=${POSTGRES_URL}
 
   postgres:
     image: postgres:16.2-alpine3.19
@@ -39,6 +39,19 @@ services:
       POSTGRES_DB: ${POSTGRES_DB}
       POSTGRES_USER: ${POSTGRES_USER}
       POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+    networks:
+      - notes
+
+  caddy:
+    image: caddy:2.7.6-alpine
+    container_name: caddy
+    depends_on:
+      - backend
+    ports:
+      - 80:80
+      - 443:443
+    environment:
+      BACKEND_PORT: ${BACKEND_PORT}
     networks:
       - notes
 

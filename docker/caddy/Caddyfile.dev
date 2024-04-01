@@ -8,13 +8,18 @@
 }
 
 localhost {
-	handle /backend/* {
-		uri strip_prefix /backend
-		reverse_proxy backend:8000
+	vars {
+		BACKEND_PORT {env.BACKEND_PORT}
+		ADMINER_PORT {env.ADMINER_PORT}
 	}
 
-	handle /adminer {
-		reverse_proxy adminer:8080
+	handle /backend/* {
+		uri strip_prefix /backend
+		reverse_proxy backend:{vars.BACKEND_PORT}
+	}
+
+	handle /adminer* {
+		reverse_proxy adminer:{vars.ADMINER_PORT}
 	}
 
 	# Default handler: If no other handlers match, return a "Not Found" error.

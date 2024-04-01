@@ -7,7 +7,7 @@ import (
 
 // envVars is a list of essential env variables required to run the Backend project.
 var envVars []string = []string{
-	"PORT",
+	"BACKEND_PORT",
 	"POSTGRES_URL",
 }
 

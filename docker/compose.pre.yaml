@@ -3,3 +3,9 @@ services:
     build:
       context: ../backend
       dockerfile: docker/Dockerfile.pre
+
+  caddy:
+    volumes:
+      - ./caddy/Caddyfile:/etc/caddy/Caddyfile
+      - caddy_data:/data
+      - caddy_config:/config
