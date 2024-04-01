@@ -1,6 +1,7 @@
 #----
 # Config
 #----
+
 ifneq (,$(wildcard .env))
 	include .env
 	export
@@ -11,10 +12,10 @@ endif
 # Variables
 #----
 
-PROJECT_NAME=note
+PROJECT_NAME := note
 
-COMPOSE_PROJECT_NAME := --project-name $(PROJECT_NAME)
 COMMON_COMPOSE := -f docker/compose.yaml
+COMPOSE_PROJECT_NAME := --project-name $(PROJECT_NAME)
 
 DEV_COMPOSE := $(COMMON_COMPOSE) -f docker/compose.dev.yaml $(COMPOSE_PROJECT_NAME)
 PRE_COMPOSE := $(COMMON_COMPOSE) -f docker/compose.pre.yaml $(COMPOSE_PROJECT_NAME)
