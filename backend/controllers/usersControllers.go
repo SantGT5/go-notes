@@ -6,8 +6,8 @@ import (
 	"os"
 	"time"
 
-	"github.com/SantGT5/notes/initializers"
-	"github.com/SantGT5/notes/models"
+	"github.com/SantGT5/quintosgo/database"
+	"github.com/SantGT5/quintosgo/models"
 
 	"github.com/gin-gonic/gin"
 	"github.com/golang-jwt/jwt/v5"
@@ -40,7 +40,9 @@ func Signup(c *gin.Context) {
 
 	user := models.User{Email: body.Email, Password: string(hash)}
 
-	result := initializers.DB.Create(&user)
+	db := database.GetDatabase()
+
+	result := db.Create(&user)
 
 	if result.Error != nil {
 		c.JSON(http.StatusBadRequest, gin.H{
@@ -73,8 +75,9 @@ func Login(c *gin.Context) {
 	}
 
 	var user models.User
+	db := database.GetDatabase()
 
-	initializers.DB.First(&user, "email = ?", body.Email)
+	db.First(&user, "email = ?", body.Email)
 
 	if user.ID == 0 {
 		c.JSON(http.StatusBadRequest, gin.H{

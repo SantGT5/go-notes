@@ -3,8 +3,8 @@ package router
 import (
 	"os"
 
-	"github.com/SantGT5/notes/controllers"
-	"github.com/SantGT5/notes/middleware"
+	"github.com/SantGT5/quintosgo/controllers"
+	"github.com/SantGT5/quintosgo/middleware"
 	"github.com/gin-gonic/gin"
 )
 

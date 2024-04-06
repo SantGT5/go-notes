@@ -1,18 +1,12 @@
 package main
 
 import (
-	"github.com/SantGT5/notes/initializers"
-	"github.com/SantGT5/notes/router"
+	"github.com/SantGT5/quintosgo/database"
+	"github.com/SantGT5/quintosgo/router"
 )
 
-func int() {
-	initializers.LoadEnvVariables()
-	initializers.ConnectToDb()
-	initializers.SyncDatabase()
-
-	router.Initializer()
-}
-
 func main() {
-	int()
+	database.Init()
+
+	router.Init()
 }

@@ -7,7 +7,7 @@ import (
 	"github.com/gin-gonic/gin"
 )
 
-func Initializer() {
+func Init() error {
 	var router *gin.Engine = gin.Default()
 
 	// Cors Config
@@ -22,5 +22,8 @@ func Initializer() {
 
 	if err != nil {
 		fmt.Println("Error starting server:", err.Error())
+		return err
 	}
+
+	return nil
 }

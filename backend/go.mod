@@ -1,4 +1,4 @@
-module github.com/SantGT5/notes
+module github.com/SantGT5/quintosgo
 
 go 1.22.1
 

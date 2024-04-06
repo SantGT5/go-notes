@@ -26,14 +26,22 @@ PRO_COMPOSE := $(COMMON_COMPOSE) -f docker/compose.prod.yaml $(COMPOSE_PROJECT_N
 #----
 
 .PHONY: start/dev
-start/dev:## Start development environment
+start/dev: checkEnv ## Start development environment
 	@echo "Starting development environment..."
 	docker-compose $(DEV_COMPOSE) up --build
 
 .PHONY: start/pre
-start/pre:## Start pre-production environment
+start/pre: checkEnv ## Start pre-production environment
 	@echo "Starting pre-production environment..."
 	docker-compose $(PRE_COMPOSE) up --build
+
+#----
+# Scripts
+#----
+
+.PHONY: checkEnv
+checkEnv: ## checks for empty or unset env variables
+	go run scripts/main.go
 
 #----
 # Others

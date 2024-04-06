@@ -6,14 +6,15 @@ import (
 	"os"
 	"time"
 
-	"github.com/SantGT5/notes/initializers"
-	"github.com/SantGT5/notes/models"
+	"github.com/SantGT5/quintosgo/database"
+	"github.com/SantGT5/quintosgo/models"
 	"github.com/gin-gonic/gin"
 	"github.com/golang-jwt/jwt/v5"
 )
 
 func RequiredAuth(c *gin.Context) {
 	tokenString, err := c.Cookie("Authorization")
+	db := database.GetDatabase()
 
 	if err != nil {
 		c.AbortWithStatus(http.StatusUnauthorized)
@@ -39,7 +40,7 @@ func RequiredAuth(c *gin.Context) {
 
 		var user models.User
 
-		initializers.DB.First(&user, claims["sub"])
+		db.First(&user, claims["sub"])
 
 		if user.ID == 0 {
 			c.AbortWithStatus(http.StatusUnauthorized)
