@@ -14,7 +14,7 @@ var envVars = []string{
 	"POSTGRES_URL",
 	"JWT_SECRET_KEY",
 	"BACKEND_PORT",
-	"ALLOW_ORIGIN",
+	"ALLOW_ORIGINS",
 }
 
 // checkEnv checks for empty or unset env variables and prints a list of them.
@@ -37,7 +37,9 @@ func CheckEnv() {
 		os.Exit(1)
 	}
 
+	fmt.Println()
 	fmt.Println("✅ All required environment variables are set.")
+	fmt.Println()
 }
 
 func main() {

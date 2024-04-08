@@ -1,12 +1,12 @@
 package database
 
 import (
-	"github.com/SantGT5/quintosgo/models"
+	"github.com/SantGT5/quintosgo/schemas"
 )
 
 func MigrateDB() error {
 	// Get all structs from the models package
-	models := []interface{}{&models.User{}}
+	models := []interface{}{&schemas.User{}}
 
 	// Migrate each struct
 	err := db.AutoMigrate(models...)

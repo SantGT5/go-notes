@@ -8,6 +8,7 @@ import (
 
 	"github.com/SantGT5/quintosgo/database"
 	"github.com/SantGT5/quintosgo/models"
+	"github.com/SantGT5/quintosgo/schemas"
 
 	"github.com/gin-gonic/gin"
 	"github.com/golang-jwt/jwt/v5"
@@ -40,11 +41,9 @@ func Signup(c *gin.Context) {
 
 	user := models.User{Email: body.Email, Password: string(hash)}
 
-	db := database.GetDatabase()
+	createUserError := user.CreateUser()
 
-	result := db.Create(&user)
-
-	if result.Error != nil {
+	if createUserError != nil {
 		c.JSON(http.StatusBadRequest, gin.H{
 			"error": "Failed to create user",
 		})
@@ -74,7 +73,7 @@ func Login(c *gin.Context) {
 		return
 	}
 
-	var user models.User
+	var user schemas.User
 	db := database.GetDatabase()
 
 	db.First(&user, "email = ?", body.Email)
@@ -136,7 +135,7 @@ func Validate(c *gin.Context) {
 		return
 	}
 
-	userData, ok := user.(models.User)
+	userData, ok := user.(schemas.User)
 
 	if !ok {
 		c.JSON(http.StatusInternalServerError, gin.H{"error": "unable to parse user data"})
@@ -146,8 +145,8 @@ func Validate(c *gin.Context) {
 	c.JSON(http.StatusOK, gin.H{
 		"message": "Im logged in",
 		"user": gin.H{
-			"email":    userData.Email,
-			"createAt": userData.CreatedAt,
+			"email":     userData.Email,
+			"CreatedAt": userData.CreatedAt,
 		},
 	})
 }
