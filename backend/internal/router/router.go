@@ -7,14 +7,16 @@ import (
 	"github.com/gin-gonic/gin"
 )
 
+var router *gin.Engine
+
 func Init() error {
-	var router *gin.Engine = gin.Default()
+	router = gin.Default()
 
 	// Cors Config
-	Cors(router)
+	Cors()
 
 	// init Routers
-	InitRoutes(router)
+	Routes()
 
 	port := os.Getenv("BACKEND_PORT")
 

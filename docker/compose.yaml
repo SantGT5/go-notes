@@ -14,7 +14,7 @@ services:
       ALLOW_ORIGINS: ${ALLOW_ORIGINS}
       JWT_SECRET_KEY: ${JWT_SECRET_KEY}
     networks:
-      - notes
+      - quintos
 
   postgres:
     image: postgres:16.2-alpine3.19
@@ -43,7 +43,7 @@ services:
       POSTGRES_USER: ${POSTGRES_USER}
       POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
     networks:
-      - notes
+      - quintos
 
   caddy:
     image: caddy:2.7.6-alpine
@@ -56,7 +56,7 @@ services:
     environment:
       BACKEND_PORT: ${BACKEND_PORT}
     networks:
-      - notes
+      - quintos
 
 volumes:
   postgres:
@@ -64,4 +64,4 @@ volumes:
   caddy_config:
 
 networks:
-  notes:
+  quintos:

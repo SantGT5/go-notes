@@ -1,4 +1,4 @@
-package controllers
+package auth
 
 import (
 	"fmt"
@@ -6,59 +6,13 @@ import (
 	"os"
 	"time"
 
-	"github.com/SantGT5/quintosgo/database"
-	"github.com/SantGT5/quintosgo/models"
-	"github.com/SantGT5/quintosgo/schemas"
+	"github.com/SantGT5/quintosgo/internal/database"
+	"github.com/SantGT5/quintosgo/internal/models"
 
 	"github.com/gin-gonic/gin"
 	"github.com/golang-jwt/jwt/v5"
 	"golang.org/x/crypto/bcrypt"
 )
-
-func Signup(c *gin.Context) {
-	var body struct {
-		Email    string
-		Password string
-	}
-
-	if c.Bind(&body) != nil {
-		c.JSON(http.StatusBadRequest, gin.H{
-			"error": "Failed to read body",
-		})
-
-		return
-	}
-
-	hash, err := bcrypt.GenerateFromPassword([]byte(body.Password), 10)
-
-	if err != nil {
-		c.JSON(http.StatusBadRequest, gin.H{
-			"error": "Failed to hash password",
-		})
-
-		return
-	}
-
-	user := models.User{Email: body.Email, Password: string(hash)}
-
-	createUserError := user.CreateUser()
-
-	if createUserError != nil {
-		c.JSON(http.StatusBadRequest, gin.H{
-			"error": "Failed to create user",
-		})
-
-		return
-	}
-
-	c.JSON(http.StatusOK, gin.H{
-		"data": gin.H{
-			"user": gin.H{
-				"email": user.Email,
-			},
-		},
-	})
-}
 
 func Login(c *gin.Context) {
 	var body struct {
@@ -73,7 +27,7 @@ func Login(c *gin.Context) {
 		return
 	}
 
-	var user schemas.User
+	var user models.User
 	db := database.GetDatabase()
 
 	db.First(&user, "email = ?", body.Email)
@@ -125,28 +79,4 @@ func Login(c *gin.Context) {
 			"updatedAt": user.UpdatedAt,
 		},
 	}})
-}
-
-func Validate(c *gin.Context) {
-	user, ok := c.Get("user")
-
-	if !ok {
-		c.JSON(http.StatusUnauthorized, gin.H{"error": "user not found in context"})
-		return
-	}
-
-	userData, ok := user.(schemas.User)
-
-	if !ok {
-		c.JSON(http.StatusInternalServerError, gin.H{"error": "unable to parse user data"})
-		return
-	}
-
-	c.JSON(http.StatusOK, gin.H{
-		"message": "Im logged in",
-		"user": gin.H{
-			"email":     userData.Email,
-			"CreatedAt": userData.CreatedAt,
-		},
-	})
 }

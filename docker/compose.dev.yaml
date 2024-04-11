@@ -13,7 +13,7 @@ services:
     environment:
       ADMINER_DESIGN: "nette" # themes: https://github.com/vrana/adminer/tree/master/plugins
     networks:
-      - notes
+      - quintos
 
   caddy:
     volumes:

@@ -6,8 +6,8 @@ import (
 	"os"
 	"time"
 
-	"github.com/SantGT5/quintosgo/database"
-	"github.com/SantGT5/quintosgo/schemas"
+	"github.com/SantGT5/quintosgo/internal/database"
+	"github.com/SantGT5/quintosgo/internal/models"
 
 	"github.com/gin-gonic/gin"
 	"github.com/golang-jwt/jwt/v5"
@@ -39,7 +39,7 @@ func RequiredAuth(c *gin.Context) {
 			c.AbortWithStatus(http.StatusUnauthorized)
 		}
 
-		var user schemas.User
+		var user models.User
 
 		db.First(&user, claims["sub"])
 

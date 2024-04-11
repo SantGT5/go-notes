@@ -12,7 +12,7 @@ endif
 # Variables
 #----
 
-PROJECT_NAME := note
+PROJECT_NAME := quintos
 
 COMMON_COMPOSE := -f docker/compose.yaml
 COMPOSE_PROJECT_NAME := --project-name $(PROJECT_NAME)

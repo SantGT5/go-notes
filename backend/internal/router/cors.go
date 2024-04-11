@@ -5,10 +5,9 @@ import (
 	"strings"
 
 	"github.com/gin-contrib/cors"
-	"github.com/gin-gonic/gin"
 )
 
-func Cors(router *gin.Engine) {
+func Cors() {
 	allowOrigins := os.Getenv("ALLOW_ORIGINS")
 	origins := strings.Split(allowOrigins, ",")
 

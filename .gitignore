@@ -1,5 +1,5 @@
 # Binaries for programs and plugins
-backend/build
+backend/bin
 *.exe
 *.exe~
 *.dll

@@ -11,4 +11,4 @@ COPY . .
 
 EXPOSE 8000
 
-CMD CompileDaemon -log-prefix=false -build="go build -o build/main ." -command="./build/main"
+CMD CompileDaemon -log-prefix=false -build="go build -o bin/quintos cmd/quintos/main.go" -command="bin/quintos"

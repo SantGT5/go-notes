@@ -10,18 +10,19 @@ RUN go mod download && go mod verify
 
 COPY . .
 
-RUN go build -v -o /app/main
+RUN go build -v -o /app/cmd/quintos cmd/quintos/main.go
+
 
 FROM alpine:3.19.1
 WORKDIR /app
-COPY --from=builder /app/main /main
+
+COPY --from=builder /app/cmd/quintos/main /app/cmd/quintos/main
 
 # Create a non-root user for running the application
-RUN adduser --disabled-password --no-create-home nonRootUser && \
-    chown -R nonRootUser:nonRootUser /app
+RUN adduser --disabled-password --no-create-home nonRootUser
+    
+USER nonRootUser
 
 EXPOSE 8000
 
-USER nonRootUser
-
-CMD ["/main"]
+CMD ["/app/cmd/quintos/main"]
