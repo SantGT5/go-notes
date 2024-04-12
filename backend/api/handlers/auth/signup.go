@@ -36,7 +36,7 @@ func Signup(c *gin.Context) {
 		return
 	}
 
-	user := repo.Signup{Email: body.Email, Password: string(hash)}
+	user := repo.User{Email: body.Email, Password: string(hash)}
 
 	err = user.SignupUser()
 

@@ -4,12 +4,12 @@ import (
 	"github.com/SantGT5/quintosgo/internal/database"
 )
 
-type Signup struct {
+type User struct {
 	Email    string
 	Password string
 }
 
-func (u *Signup) SignupUser() error {
+func (u *User) SignupUser() error {
 	db := database.GetDatabase()
 
 	if err := db.Create(u).Error; err != nil {
