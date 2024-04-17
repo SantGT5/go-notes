@@ -1,4 +1,4 @@
-package repository
+package repositories
 
 import (
 	"github.com/SantGT5/quintosgo/internal/database"
@@ -9,7 +9,7 @@ type User struct {
 	Password string
 }
 
-func (u *User) SignupUser() error {
+func (u *User) CreateUser() error {
 	db := database.GetDatabase()
 
 	if err := db.Create(u).Error; err != nil {

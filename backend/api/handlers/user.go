@@ -1,15 +1,15 @@
-package auth
+package handlers
 
 import (
 	"net/http"
 
-	repo "github.com/SantGT5/quintosgo/internal/repository"
+	repo "github.com/SantGT5/quintosgo/internal/repositories"
 
 	"github.com/gin-gonic/gin"
 	"golang.org/x/crypto/bcrypt"
 )
 
-func Signup(c *gin.Context) {
+func PostUser(c *gin.Context) {
 	var err error
 	var hash []byte
 
@@ -38,7 +38,7 @@ func Signup(c *gin.Context) {
 
 	user := repo.User{Email: body.Email, Password: string(hash)}
 
-	err = user.SignupUser()
+	err = user.CreateUser()
 
 	if err != nil {
 		c.JSON(http.StatusBadRequest, gin.H{

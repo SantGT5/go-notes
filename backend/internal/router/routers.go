@@ -3,7 +3,7 @@ package router
 import (
 	"os"
 
-	"github.com/SantGT5/quintosgo/api/handlers/auth"
+	"github.com/SantGT5/quintosgo/api/handlers"
 	"github.com/SantGT5/quintosgo/api/handlers/validate"
 	"github.com/SantGT5/quintosgo/api/middleware"
 )
@@ -16,12 +16,12 @@ func Routes() {
 	{
 		authRouter := v1.Group("/auth")
 		{
-			authRouter.POST("/login", auth.Login)
-			authRouter.POST("/signup", auth.Signup)
+			authRouter.POST("/login", handlers.Login)
 		}
 
 		user := v1.Group("/user")
 		{
+			user.POST("", handlers.PostUser)
 			user.GET("/me", middleware.RequiredAuth, validate.Validate)
 		}
 
